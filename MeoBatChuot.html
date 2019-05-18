@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ứng dụng mô phỏng quá trình mèo bắt và ăn chuột</title>
+</head>
+<body>
+            <script>
+                let Rat = function (name,w,speed,status) {
+                    this.name = name;
+                    this.w = w;
+                    this.speed = speed;
+                    this.status = status;
+
+                    this.isLive = function () {
+                        return this.status;
+                    };
+                    this.whisper = function () {
+                        return "squeak...squeak...";
+                    }
+                };
+
+                let Cat = function (name,weight,maxSpeed) {
+                    this.name = name;
+                    this.weight = weight;
+                    this.maxSpeed = maxSpeed;
+                    this.shout = function () {
+                        return "miaw...miaw...";
+                    };
+
+                    this.checkRatStatus = function (RatStatus) {
+                        if (RatStatus === true) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    };
+
+                    this.catchRats = function (RatSpeed) {
+                        if (this.maxSpeed > RatSpeed) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    };
+                    this.eatRats = function (RatWeight,RatStatus,RatSpeed) {
+
+                        if (this.catchRats(RatSpeed) === true && this.checkRatStatus(RatStatus)) {
+                            this.weight = this.weight + RatWeight;
+                            return this.weight;
+                        }
+                        else if (this.checkRatStatus(RatStatus) === false) {
+                            return "Eww....! It's dead!";
+                        }
+                        else if (this.catchRats(RatSpeed) === false) {
+                            return "Too slow!";
+                        }
+                    }
+                };
+
+                let rat = new Rat("Jerry", 10, 200, true);
+                // console.log("this rat'name is: " + rat.name);
+                // console.log("this rat'weight is: " + rat.w);
+                // console.log("this rat'speed is: " + rat.speed);
+                // console.log("this rat'status is: " + rat.status);
+
+                let rat1 = new Rat("Jazz", 8, 20, true);
+                // console.log("this rat'name is: " + rat1.name);
+                // console.log("this rat'weight is: " + rat1.w);
+                // console.log("this rat'speed is: " + rat1.speed);
+                // console.log("this rat'status is: " + rat1.status);
+
+                let rat2 = new Rat("Flash", 10, 500, true);
+                // console.log("this rat'name is: " + rat2.name);
+                // console.log("this rat'weight is: " + rat2.w);
+                // console.log("this rat'speed is: " + rat2.speed);
+                // console.log("this rat'status is: " + rat2.status);
+
+                let rat3 = new Rat("Undead", 6, 0, false);
+                // console.log("this rat'name is: " + rat3.name);
+                // console.log("this rat'weight is: " + rat3.w);
+                // console.log("this rat'speed is: " + rat3.speed);
+                // console.log("this rat'status is: " + rat3.status);
+
+                let rat4 = new Rat("Floppy", 15, 8,true);
+                // console.log("this rat'name is: " + rat4.name);
+                // console.log("this rat'weight is: " + rat4.w);
+                // console.log("this rat'speed is: " + rat4.speed);
+                // console.log("this rat'status is: " + rat4.status);
+
+                let cat = new Cat("Tom", 60, 45);
+                console.log("Tom's weight is: " + cat.weight);
+                console.log("Tom's max speed is: " + cat.maxSpeed);
+
+                console.log(cat.shout());
+                console.log(rat.whisper());
+
+
+                console.log("is Jerry live? " + cat.checkRatStatus(rat.status));
+                console.log("Could Tom catch Jerry? " + cat.catchRats(rat.speed));
+                console.log("Jerry said : " + '"' + cat.eatRats(rat.w,rat.status,rat.speed) + '"');
+
+                console.log("is Undead live? " + cat.checkRatStatus(rat3.status));
+                console.log("Could Tom catch Undead? " + cat.catchRats(rat3.speed));
+                console.log("Tom said : " + '"' + cat.eatRats(rat3.w,rat3.status,rat3.speed) + '"');
+
+                console.log("is Floppy live? " + cat.checkRatStatus(rat4.status));
+                console.log("Could Tom catch Floppy? " + cat.catchRats(rat4.speed));
+                console.log("After caught & ate Floppy, current Tom's weight is : " + cat.eatRats(rat4.w,rat4.status,rat4.speed));
+
+
+            </script>
+</body>
+</html>
